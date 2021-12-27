@@ -119,7 +119,7 @@ public class RigelListeGeneratorMojo
       "INF.STP_", "INF.IN_", "INF.OUT_", "INF.RUN_", "ANA.", "INF.", "GEN.", "STP.", "RIS.", "APP.", "SAT."
     };
     //
-    public static final String DATE_FORMATTER = "it.flower.flowercore.utils.format.DateTimeFormat";
+    public static final String DATE_FORMATTER = "DateTimeFormat";
     public static final String STYLE_TECH_FIELD = "cell_form_tech";
 
     public GenListe()
