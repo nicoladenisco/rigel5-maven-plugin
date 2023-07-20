@@ -57,9 +57,9 @@ public class RigelAdjustSchemaMojoTest
     assertNotNull(outputDirSql);
     assertTrue(outputDirSql.exists());
 
-    File mxml = new File(outputDirXml, "id-table-schema.xml-new");
+    File mxml = new File(outputDirXml, "application-schema.xml-new");
     assertTrue(mxml.exists());
-    File msql = new File(outputDirSql, "id-table-schema.txt");
+    File msql = new File(outputDirSql, "application-schema.txt");
     assertTrue(msql.exists());
   }
 

@@ -72,6 +72,7 @@ public class RigelAdjustSchemaMojo
   {
     getLog().info("Generazione schema XML in " + outputDirXml.getAbsolutePath());
     getLog().info("Generazione info   SQL in " + outputDirSql.getAbsolutePath());
+    AdjustSchema.configuraLog4j2();
 
     outputDirSql.mkdirs();
     outputDirXml.mkdirs();
@@ -127,7 +128,6 @@ public class RigelAdjustSchemaMojo
      throws Exception
   {
     getLog().info("Generating for " + fi.getAbsolutePath());
-    AdjustSchema.configuraLog4j2();
 
     AdjustSchema as = new AdjustSchema();
 
@@ -152,34 +152,45 @@ public class RigelAdjustSchemaMojo
       as.omBasePeer = omBasePeer;
 
     as.xmlFile = fi.getAbsolutePath();
-    as.run();
-
-    if(inplace)
-    {
-      // genera il backup del file corrente
-      File backup = new File(fi.getParentFile(), fi.getName() + "-backup");
-      backup.delete();
-      fi.renameTo(backup);
-
-      // salva il nuovo documento XML al post del precedente
-      as.ouputFile = fi.getAbsolutePath();
-    }
-    else
-    {
-      File f = new File(outputDirXml, fi.getName());
-      if(f.exists())
-        f = new File(outputDirXml, fi.getName() + "-new");
-
-      as.ouputFile = f.getAbsolutePath();
-    }
 
     if(outputDirSql != null)
     {
       File f = new File(outputDirSql, fi.getName().replace(".xml", ".txt"));
       as.infoFile = f.getAbsolutePath();
+      getLog().info("Info file in " + as.infoFile);
     }
 
-    as.print(as.doc);
+    if(inplace)
+    {
+      // verifica il timestamp del file con il suo backup se esiste
+      File backup = new File(fi.getParentFile(), fi.getName() + "-backup");
+      if(!backup.exists() || fi.lastModified() > backup.lastModified())
+      {
+        as.run();
+
+        // genera il backup del file corrente
+        backup.delete();
+        fi.renameTo(backup);
+
+        // salva il nuovo documento XML al post del precedente
+        as.ouputFile = fi.getAbsolutePath();
+        as.print(as.doc);
+        com.google.common.io.Files.touch(backup);
+      }
+      else
+        getLog().info("Skip " + fi.getAbsolutePath() + ": update.");
+    }
+    else
+    {
+      as.run();
+
+      File f = new File(outputDirXml, fi.getName());
+      if(f.exists())
+        f = new File(outputDirXml, fi.getName() + "-new");
+
+      as.ouputFile = f.getAbsolutePath();
+      as.print(as.doc);
+    }
   }
 
   public class AdjustSchema extends AbstractAdjustSchema
