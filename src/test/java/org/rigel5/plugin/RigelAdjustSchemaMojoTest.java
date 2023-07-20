@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 import org.junit.Rule;
 import org.junit.Test;
 
-public class RigelListeGeneratorMojoTest
+public class RigelAdjustSchemaMojoTest
 {
   public boolean bypassTest = false;
 
@@ -40,7 +40,7 @@ public class RigelListeGeneratorMojoTest
     assertNotNull(pom);
     assertTrue(pom.exists());
 
-    RigelListeGeneratorMojo myMojo = (RigelListeGeneratorMojo) rule.lookupConfiguredMojo(pom, "listexml");
+    RigelAdjustSchemaMojo myMojo = (RigelAdjustSchemaMojo) rule.lookupConfiguredMojo(pom, "adjschema");
     assertNotNull(myMojo);
 
     File schemaDir = (File) rule.getVariableValueFromObject(myMojo, "schemaDir");
@@ -57,9 +57,9 @@ public class RigelListeGeneratorMojoTest
     assertNotNull(outputDirSql);
     assertTrue(outputDirSql.exists());
 
-    File mxml = new File(outputDirXml, "id-table-modelli.xml");
+    File mxml = new File(outputDirXml, "id-table-schema.xml-new");
     assertTrue(mxml.exists());
-    File msql = new File(outputDirSql, "id-table-viste.sql");
+    File msql = new File(outputDirSql, "id-table-schema.txt");
     assertTrue(msql.exists());
   }
 
