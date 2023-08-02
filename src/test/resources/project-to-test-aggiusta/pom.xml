@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>rigel.plugin</groupId>
+  <artifactId>rigel-maven-plugin</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>Test RigelAdjustSchemaMojo</name>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>rigel5.plugin</groupId>
+        <artifactId>rigel5-maven-plugin</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <configuration>
+          <!-- Specify the RigelListeGeneratorMojo parameter -->
+          <schemaDir>.</schemaDir>
+          <outputDirXml>target/test-harness/project-to-test/aggiusta</outputDirXml>
+          <outputDirSql>target/test-harness/project-to-test/aggiusta</outputDirSql>
+          <ignoreFileTimestamp>true</ignoreFileTimestamp>
+          <useSchemaNames>true</useSchemaNames>
+        </configuration>
+
+        <executions>
+          <!-- aggiusta schema -->
+          <execution>
+            <id>adjschema</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>adjschema</goal>
+            </goals>
+            <configuration>
+              <adapter>postgresql</adapter>
+              <loglevel>debug</loglevel>
+              <omBaseClass>AppBaseTorqueObject</omBaseClass>
+              <omBasePeer>AppBaseTorquePeer</omBasePeer>
+              <inplace>false</inplace>
+              <forcePrimary>true</forcePrimary>
+              <forceForeign>true</forceForeign>
+              <!--
+          <sourceDir>${project.basedir}/src/main/torque-schema</sourceDir>
+          <outputDirSql>${project.build.directory}/generated-sql/torque/mysql</outputDirSql>
+              -->
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

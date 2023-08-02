@@ -30,7 +30,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://db.apache.org/torque/4.0/templates/database
         http://db.apache.org/torque/4.0/templates/database-strict.xsd"
-  name="flower"
+  name="test"
   defaultIdMethod="native">
 
   <table name="ID_TABLE" idMethod="idbroker">

@@ -19,11 +19,16 @@
         <configuration>
           <!-- Specify the RigelListeGeneratorMojo parameter -->
           <schemaDir>.</schemaDir>
-          <outputDirXml>target/test-harness/project-to-test</outputDirXml>
-          <outputDirSql>target/test-harness/project-to-test</outputDirSql>
+          <outputDirXml>target/test-harness/project-to-test-liste</outputDirXml>
+          <outputDirSql>target/test-harness/project-to-test-liste</outputDirSql>
+          <ignoreFileTimestamp>true</ignoreFileTimestamp>
+          <useSchemaNames>true</useSchemaNames>
         </configuration>
+
         <executions>
+          <!-- generatore liste XML per rigel e viste per i db -->
           <execution>
+            <id>listexml</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>listexml</goal>

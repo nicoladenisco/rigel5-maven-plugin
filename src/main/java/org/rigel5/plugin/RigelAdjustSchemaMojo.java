@@ -66,6 +66,9 @@ public class RigelAdjustSchemaMojo
   @Parameter(defaultValue = "null", property = "omBasePeer", required = false)
   private String omBasePeer = null;
 
+  @Parameter(defaultValue = "false", property = "ignoreFileTimestamp", required = false)
+  private boolean ignoreFileTimestamp;
+
   @Override
   public void execute()
      throws MojoExecutionException

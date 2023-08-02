@@ -28,9 +28,23 @@
   xmlns="http://db.apache.org/torque/5.0/templates/database"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://db.apache.org/torque/5.0/templates/database         http://db.apache.org/torque/torque-5.0/documentation/orm-reference/database-5-0-strict.xsd"
-  name="turbine" defaultIdMethod="native">
+  name="test" defaultIdMethod="native">
 
-  <table name="MODULI" idMethod="native" description="Moduli di life connect">
+  <table name="AUT.CODA" idMethod="native" >
+    <column name="CODA_ID" required="true" primaryKey="true" type="INTEGER" />
+    <column name="CODICE" required="true" size="255" type="VARCHAR" description="identificativo di sessione" />
+    <column name="DESCRIZIONE" required="true" size="255" type="VARCHAR" />
+    <column name="URI_PATH" required="true" size="255" type="VARCHAR" />
+    <column name="URI_PATH_RELATIVA" required="true" size="255" type="VARCHAR" />
+    <column name="VAL1" size="255" type="VARCHAR" />
+    <column name="VAL2" type="CLOB" />
+    <id-method-parameter name="seqName" value="AUT.CODA_CODA_ID_SEQ" />
+    <unique name="IDX_AUT_CODA_1">
+      <unique-column name="CODICE" />
+    </unique>
+  </table>
+
+  <table name="MODULI" idMethod="native" >
     <column name="MODULI_ID" required="true" primaryKey="true" type="INTEGER" />
     <column name="CODICE" required="true" size="64" type="VARCHAR" />
     <column name="DESCRIZIONE" required="true" size="64" type="VARCHAR" />

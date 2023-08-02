@@ -36,7 +36,7 @@ public class RigelListeGeneratorMojoTest
     if(bypassTest)
       return;
 
-    File pom = new File("target/test-classes/project-to-test/");
+    File pom = new File("target/test-classes/project-to-test-liste/");
     assertNotNull(pom);
     assertTrue(pom.exists());
 

@@ -27,6 +27,12 @@ public class RigelListeGeneratorMojo
   @Parameter(defaultValue = "mysql", property = "adapter", required = true)
   private String adapter;
 
+  @Parameter(defaultValue = "false", property = "ignoreFileTimestamp", required = false)
+  private boolean ignoreFileTimestamp;
+
+  @Parameter(defaultValue = "false", property = "useSchemaNames", required = false)
+  private boolean useSchemaNames;
+
   @Override
   public void execute()
      throws MojoExecutionException
@@ -85,13 +91,13 @@ public class RigelListeGeneratorMojo
     gl.adapter = adapter;
 
     File fxml = new File(outputDirXml, fi.getName().toLowerCase().replace("-schema.xml", "-modelli.xml"));
-    if(fxml.exists() && fxml.length() > 0 && fxml.lastModified() >= fi.lastModified())
+    if(!ignoreFileTimestamp && fxml.exists() && fxml.length() > 0 && fxml.lastModified() >= fi.lastModified())
       getLog().info(fxml.getAbsolutePath() + " è aggiornato.");
     else
       gl.ouputFile = fxml.getAbsolutePath();
 
     File fsql = new File(outputDirSql, fi.getName().toLowerCase().replace("-schema.xml", "-viste.sql"));
-    if(fsql.exists() && fsql.length() > 0 && fsql.lastModified() >= fi.lastModified())
+    if(!ignoreFileTimestamp && fsql.exists() && fsql.length() > 0 && fsql.lastModified() >= fi.lastModified())
       getLog().info(fsql.getAbsolutePath() + " è aggiornato.");
     else
       gl.sqloutput = fsql.getAbsolutePath();
@@ -116,7 +122,7 @@ public class RigelListeGeneratorMojo
     };
     public String[] toRemove =
     {
-      "INF.STP_", "INF.IN_", "INF.OUT_", "INF.RUN_", "ANA.", "INF.", "GEN.", "STP.", "RIS.", "APP.", "SAT."
+      //"INF.STP_", "INF.IN_", "INF.OUT_", "INF.RUN_", "ANA.", "INF.", "GEN.", "STP.", "RIS.", "APP.", "SAT."
     };
     //
     public static final String DATE_FORMATTER = "DateTimeFormat";
@@ -125,7 +131,7 @@ public class RigelListeGeneratorMojo
     public GenListe()
     {
       xmlFile = "application-schema.xml";
-      compatTorque4 = true;
+      compatTorque4 = !useSchemaNames;
       ouputFile = sqloutput = null;
     }
 
