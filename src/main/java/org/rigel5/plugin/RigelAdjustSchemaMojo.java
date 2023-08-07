@@ -181,18 +181,23 @@ public class RigelAdjustSchemaMojo
         com.google.common.io.Files.touch(backup);
       }
       else
-        getLog().info("Skip " + fi.getAbsolutePath() + ": update.");
+        getLog().info("Skip " + fi.getAbsolutePath() + ": uptodate.");
     }
     else
     {
-      as.run();
-
       File f = new File(outputDirXml, fi.getName());
-      if(f.exists())
+      if(f.equals(fi))
         f = new File(outputDirXml, fi.getName() + "-new");
 
-      as.ouputFile = f.getAbsolutePath();
-      as.print(as.doc);
+      if(ignoreFileTimestamp || !f.exists() || fi.lastModified() > f.lastModified())
+      {
+        as.run();
+
+        as.ouputFile = f.getAbsolutePath();
+        as.print(as.doc);
+      }
+      else
+        getLog().info("Skip " + fi.getAbsolutePath() + ": uptodate.");
     }
   }
 
