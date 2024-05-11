@@ -22,7 +22,7 @@
           <outputDirXml>target/test-harness/project-to-test/aggiusta</outputDirXml>
           <outputDirSql>target/test-harness/project-to-test/aggiusta</outputDirSql>
           <ignoreFileTimestamp>true</ignoreFileTimestamp>
-          <useSchemaNames>true</useSchemaNames>
+          <riferimentiCircolari>false</riferimentiCircolari>
         </configuration>
 
         <executions>
@@ -39,8 +39,8 @@
               <omBaseClass>AppBaseTorqueObject</omBaseClass>
               <omBasePeer>AppBaseTorquePeer</omBasePeer>
               <inplace>false</inplace>
-              <forcePrimary>true</forcePrimary>
-              <forceForeign>true</forceForeign>
+              <forcePrimary>false</forcePrimary>
+              <forceForeign>false</forceForeign>
               <!--
           <sourceDir>${project.basedir}/src/main/torque-schema</sourceDir>
           <outputDirSql>${project.build.directory}/generated-sql/torque/mysql</outputDirSql>

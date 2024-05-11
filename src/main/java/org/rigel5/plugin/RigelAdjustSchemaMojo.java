@@ -69,6 +69,9 @@ public class RigelAdjustSchemaMojo
   @Parameter(defaultValue = "false", property = "ignoreFileTimestamp", required = false)
   private boolean ignoreFileTimestamp;
 
+  @Parameter(defaultValue = "true", property = "riferimentiCircolari", required = false)
+  private boolean riferimentiCircolari;
+
   @Override
   public void execute()
      throws MojoExecutionException
@@ -141,6 +144,7 @@ public class RigelAdjustSchemaMojo
     as.forceTableJavaName = forceTableJavaName;
     as.useSchema = useSchema;
     as.forcePrimaryIDtoNative = forcePrimaryIDtoNative;
+    as.riferimentiCircolari = riferimentiCircolari;
 
     if("postgresql".equals(adapter))
       as.usePostgresql = true;

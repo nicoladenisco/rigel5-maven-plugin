@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class RigelAdjustSchemaMojoTest
 {
-  public boolean bypassTest = true;
+  public boolean bypassTest = false;
 
   @Rule
   public MojoRule rule = new MojoRule()
@@ -57,7 +57,7 @@ public class RigelAdjustSchemaMojoTest
     assertNotNull(outputDirSql);
     assertTrue(outputDirSql.exists());
 
-    File mxml = new File(outputDirXml, "application-schema.xml-new");
+    File mxml = new File(outputDirXml, "application-schema.xml");
     assertTrue(mxml.exists());
     File msql = new File(outputDirSql, "application-schema.txt");
     assertTrue(msql.exists());
